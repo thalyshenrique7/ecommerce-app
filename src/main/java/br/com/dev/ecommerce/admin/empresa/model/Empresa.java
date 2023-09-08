@@ -36,4 +36,29 @@ public class Empresa implements Serializable {
 
 	@Column
 	private boolean matriz = true;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public boolean isMatriz() {
+		return matriz;
+	}
+
+	public void setMatriz(boolean matriz) {
+		this.matriz = matriz;
+	}
+
 }
