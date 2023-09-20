@@ -19,7 +19,6 @@ import br.com.dev.ecommerce.admin.usuario.enums.Permissao;
 @DynamicUpdate
 @Table(name = "usuario")
 public class Usuario implements Serializable {
-
 	private static final long serialVersionUID = 985098201651404172L;
 
 	@Id

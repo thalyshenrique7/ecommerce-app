@@ -14,10 +14,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Usuario buscar(Long id) {
-		return usuarioRepository.findById(id).map(usuario -> {
-			usuario.getId();
-			return usuario;
-		}).orElse(null);
+		return usuarioRepository.findById(id).orElse(null);
 	}
 
 	@Override
@@ -50,6 +47,31 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 		} catch (Exception e) {
 			throw e;
+		}
+
+	}
+
+	@Override
+	public void atualizar(Long id, Usuario novoUsuario) {
+
+		if (id != null) {
+
+			try {
+
+				/*
+				 * alteração de cpf e rg não são permitidas.
+				 */
+				Usuario usuario = this.buscar(id);
+
+				usuario.setNome(novoUsuario.getNome());
+				usuario.setPermissao(novoUsuario.getPermissao());
+
+				usuarioRepository.save(usuario);
+
+			} catch (Exception e) {
+				throw e;
+			}
+
 		}
 
 	}

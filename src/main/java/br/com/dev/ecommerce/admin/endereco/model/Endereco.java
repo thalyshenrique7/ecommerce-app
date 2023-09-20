@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +16,7 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.annotations.DynamicUpdate;
 
 import br.com.dev.ecommerce.admin.empresa.model.Empresa;
+import br.com.dev.ecommerce.admin.endereco.enums.Estado;
 
 /**
  * @author Thalys Henrique
@@ -44,9 +47,8 @@ public class Endereco implements Serializable {
 	@Column(length = 30)
 	private String cidade;
 
-	@NotEmpty
-	@Column(length = 2)
-	private String uf;
+	@Enumerated(EnumType.STRING)
+	private Estado estado;
 
 	@NotEmpty
 	@Column(length = 15)
@@ -87,12 +89,12 @@ public class Endereco implements Serializable {
 		this.cidade = cidade;
 	}
 
-	public String getUf() {
-		return uf;
+	public Estado getEstado() {
+		return estado;
 	}
 
-	public void setUf(String uf) {
-		this.uf = uf;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 	public String getPais() {
