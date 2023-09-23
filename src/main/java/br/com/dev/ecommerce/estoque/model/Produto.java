@@ -24,7 +24,6 @@ import org.hibernate.envers.Audited;
 @DynamicUpdate
 @Table(name = "produto")
 public class Produto implements Serializable {
-
 	private static final long serialVersionUID = 985098201651404172L;
 
 	@Id
@@ -64,6 +63,14 @@ public class Produto implements Serializable {
 
 	@Column
 	private boolean decidirPrecoNaVenda;
+	
+	public Produto() {
+		
+	}
+	
+	public Produto(Class<Produto> produto) {
+		
+	}
 
 	public Long getId() {
 		return id;
