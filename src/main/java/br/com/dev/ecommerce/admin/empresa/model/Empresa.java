@@ -2,6 +2,7 @@ package br.com.dev.ecommerce.admin.empresa.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,11 +32,21 @@ public class Empresa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToOne
+	private String nome;
+
+	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
 
 	@Column
 	private boolean matriz = true;
+
+	public Empresa() {
+
+	}
+
+	public Empresa(Class<Empresa> empresa) {
+
+	}
 
 	public Long getId() {
 		return id;
@@ -43,6 +54,14 @@ public class Empresa implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public Endereco getEndereco() {

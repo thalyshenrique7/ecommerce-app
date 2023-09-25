@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.dev.ecommerce.admin.usuario.dto.UsuarioDTO;
 import br.com.dev.ecommerce.admin.usuario.model.Usuario;
 import br.com.dev.ecommerce.admin.usuario.service.UsuarioServiceImpl;
 
@@ -22,7 +23,7 @@ public class UsuarioController {
 
 	@RequestMapping(value = "/buscar/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
-	public Usuario buscar(@PathVariable(value = "id") Long id) {
+	public UsuarioDTO buscar(@PathVariable(value = "id") Long id) {
 
 		return usuarioService.buscar(id);
 
@@ -39,9 +40,9 @@ public class UsuarioController {
 	@ResponseStatus(HttpStatus.OK)
 	public void excluir(@PathVariable(value = "id") Long id) {
 
-		Usuario usuario = usuarioService.buscar(id);
+		//Usuario usuario = usuarioService.buscar(id);
 
-		usuarioService.excluir(usuario);
+		//usuarioService.excluir(usuario);
 	}
 
 	@RequestMapping(value = "/atualizar/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)

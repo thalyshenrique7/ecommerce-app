@@ -37,6 +37,17 @@ public class Usuario implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Permissao permissao;
 
+	@Column(nullable = false)
+	private boolean ativo;
+
+	public Usuario() {
+
+	}
+
+	public Usuario(Class<Usuario> usuario) {
+
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -75,6 +86,14 @@ public class Usuario implements Serializable {
 
 	public void setPermissao(Permissao permissao) {
 		this.permissao = permissao;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
 	}
 
 }

@@ -39,7 +39,6 @@ public class Endereco implements Serializable {
 	@Column(length = 30)
 	private String rua;
 
-	@NotEmpty
 	@Column
 	private Long numero;
 
@@ -53,9 +52,6 @@ public class Endereco implements Serializable {
 	@NotEmpty
 	@Column(length = 15)
 	private String pais;
-
-	@OneToOne
-	private Empresa empresa;
 
 	public Long getId() {
 		return id;
@@ -104,13 +100,4 @@ public class Endereco implements Serializable {
 	public void setPais(String pais) {
 		this.pais = pais;
 	}
-
-	public Empresa getEmpresa() {
-		return empresa;
-	}
-
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
-	}
-
 }
