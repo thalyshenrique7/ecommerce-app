@@ -3,8 +3,6 @@ package br.com.dev.ecommerce.admin.usuario.mapper;
 import java.io.Serializable;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 
 import br.com.dev.ecommerce.admin.usuario.dto.UsuarioDTO;
@@ -19,12 +17,5 @@ public abstract class UsuarioMapper extends Usuario implements Serializable {
 		super(Usuario.class);
 	}
 	
-	@Mappings({
-		@Mapping(target = "nome", source = "nome"),
-		@Mapping(target = "cpf", source = "cpf"),
-		@Mapping(target = "rg", source = "rg"),
-		@Mapping(target = "permissao", source = "usuario.permissao.tipo"),
-		@Mapping(target = "ativo", source = "ativo"),
-	})
 	public abstract UsuarioDTO setInformacoesUsuario(Usuario usuario);
 }

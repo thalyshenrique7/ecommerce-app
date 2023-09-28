@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +15,8 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.envers.Audited;
+
+import br.com.dev.ecommerce.estoque.enums.Movimentacao;
 
 /**
  * @author Thalys Henrique
@@ -58,18 +62,24 @@ public class Produto implements Serializable {
 	@Column(precision = 19, scale = 4)
 	private BigDecimal largura;
 
+	@Column(precision = 19)
+	private BigDecimal quantidade;
+
+	@Column(precision = 19)
+	private BigDecimal quantidadeDevolvida;
+
 	@Column
 	private boolean ativo;
 
-	@Column
-	private boolean decidirPrecoNaVenda;
-	
+	@Enumerated(EnumType.STRING)
+	private Movimentacao movimentacao;
+
 	public Produto() {
-		
+
 	}
-	
+
 	public Produto(Class<Produto> produto) {
-		
+
 	}
 
 	public Long getId() {
@@ -144,12 +154,36 @@ public class Produto implements Serializable {
 		this.largura = largura;
 	}
 
+	public BigDecimal getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(BigDecimal quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public BigDecimal getQuantidadeDevolvida() {
+		return quantidadeDevolvida;
+	}
+
+	public void setQuantidadeDevolvida(BigDecimal quantidadeDevolvida) {
+		this.quantidadeDevolvida = quantidadeDevolvida;
+	}
+
 	public boolean isAtivo() {
 		return ativo;
 	}
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public Movimentacao getMovimentacao() {
+		return movimentacao;
+	}
+
+	public void setMovimentacao(Movimentacao movimentacao) {
+		this.movimentacao = movimentacao;
 	}
 
 }

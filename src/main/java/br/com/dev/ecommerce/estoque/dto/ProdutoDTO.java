@@ -1,5 +1,9 @@
 package br.com.dev.ecommerce.estoque.dto;
 
+import java.math.BigDecimal;
+
+import br.com.dev.ecommerce.estoque.enums.Movimentacao;
+
 public class ProdutoDTO {
 
 	private String nome;
@@ -7,6 +11,12 @@ public class ProdutoDTO {
 	private String ncm;
 
 	private String codigoBarras;
+
+	private BigDecimal precoCusto;
+
+	private BigDecimal precoVenda;
+
+	private Movimentacao movimentacao;
 
 	public String getNome() {
 		return nome;
@@ -30,6 +40,30 @@ public class ProdutoDTO {
 
 	public void setCodigoBarras(String codigoBarras) {
 		this.codigoBarras = codigoBarras;
+	}
+
+	public BigDecimal getPrecoCusto() {
+		return precoCusto;
+	}
+
+	public void setPrecoCusto(BigDecimal precoCusto) {
+		this.precoCusto = precoCusto;
+	}
+
+	public BigDecimal getPrecoVenda() {
+		return precoVenda;
+	}
+
+	public void setPrecoVenda(BigDecimal precoVenda) {
+		this.precoVenda = precoVenda;
+	}
+
+	public Movimentacao getMovimentacao() {
+		return movimentacao;
+	}
+
+	public void setMovimentacao(Movimentacao movimentacao) {
+		this.movimentacao = movimentacao;
 	}
 
 }

@@ -3,8 +3,6 @@ package br.com.dev.ecommerce.admin.empresa.mapper;
 import java.io.Serializable;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 
 import br.com.dev.ecommerce.admin.empresa.dto.EmpresaDTO;
@@ -19,9 +17,5 @@ public abstract class EmpresaMapper extends Empresa implements Serializable {
 		super(Empresa.class);
 	}
 	
-	@Mappings({
-		@Mapping(target = "nome", source = "nome"),
-		@Mapping(target = "endereco", source = "endereco"),
-	})
 	public abstract EmpresaDTO setInformacoesEmpresa(Empresa empresa);
 }
