@@ -4,6 +4,6 @@ import br.com.dev.ecommerce.estoque.model.Produto;
 
 public interface ProdutoRepositoryCustom {
 	
-	public Produto getProduto(Long id);
+	public void merge(Produto produto);
 
 }

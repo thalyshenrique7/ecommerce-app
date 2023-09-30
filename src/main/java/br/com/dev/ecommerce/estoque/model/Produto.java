@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.envers.Audited;
@@ -34,15 +33,12 @@ public class Produto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotEmpty
 	@Column
 	private String nome;
 
-	@NotEmpty
 	@Column
 	private String ncm;
 
-	@NotEmpty
 	@Column(length = 12)
 	private String codigoBarras;
 

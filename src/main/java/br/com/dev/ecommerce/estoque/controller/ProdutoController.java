@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.dev.ecommerce.estoque.dto.ProdutoDTO;
 import br.com.dev.ecommerce.estoque.model.Produto;
 import br.com.dev.ecommerce.estoque.service.ProdutoServiceImpl;
 
@@ -23,7 +22,7 @@ public class ProdutoController {
 
 	@RequestMapping(value = "/buscar/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
-	public ProdutoDTO buscar(@PathVariable(value = "id") Long id) {
+	public Produto buscar(@PathVariable(value = "id") Long id) {
 
 		return this.produtoService.buscar(id);
 	}
@@ -35,4 +34,19 @@ public class ProdutoController {
 		this.produtoService.salvar(produto);
 	}
 
+	@RequestMapping(value = "/excluir/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	public void excluir(@PathVariable(value = "id") Long id) {
+
+		Produto produto = this.produtoService.buscar(id);
+
+		this.produtoService.excluir(produto);
+	}
+
+	@RequestMapping(value = "/atualizar/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	public void atualizar(@PathVariable(value = "id") Long id, @RequestBody Produto produto) {
+
+		this.produtoService.atualizar(id, produto);
+	}
 }
