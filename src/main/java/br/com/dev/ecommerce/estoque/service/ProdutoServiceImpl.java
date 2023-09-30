@@ -81,23 +81,21 @@ public class ProdutoServiceImpl implements ProdutoService {
 	@Override
 	public void atualizar(Long id, Produto produto) {
 
-		if (produto != null) {
+		if (id != null) {
 
 			if (!BigDecimalUtils.isLess(produto.getQuantidade(), BigDecimal.ZERO)) {
 
 				produto.setId(id);
-
-				try {
-
-					this.produtoRepositoryCustom.merge(produto);
-
-				} catch (EstoqueException e) {
-					throw new EstoqueException("Saldo do produto não pode ser menor que 0.");
-				}
 			}
 		}
 
-		throw new NotFoundException("Produto não foi encontrado no sistema.");
+		try {
+
+			this.produtoRepositoryCustom.merge(produto);
+
+		} catch (NotFoundException e) {
+			throw new EstoqueException("Ocorreu um problema ao tentar salvar o produto.");
+		}
 	}
 
 }
