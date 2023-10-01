@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -39,6 +40,9 @@ public class Usuario implements Serializable {
 
 	@Column(nullable = false)
 	private boolean ativo;
+
+	@Transient
+	private boolean logado;
 
 	public Usuario() {
 
@@ -94,6 +98,14 @@ public class Usuario implements Serializable {
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public boolean isLogado() {
+		return logado;
+	}
+
+	public void setLogado(boolean logado) {
+		this.logado = logado;
 	}
 
 }

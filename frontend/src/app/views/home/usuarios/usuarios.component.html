@@ -1,0 +1,39 @@
+<mat-card>
+
+    <table mat-table class="mat-elevation-z8">
+
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let usuario">{{usuario.id}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef>Nome</th>
+            <td mat-cell *matCellDef="let usuario">{{usuario.nome}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="cpf">
+            <th mat-header-cell *matHeaderCellDef>CPF</th>
+            <td mat-cell *matCellDef="let usuario">{{usuario.cpf}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="rg">
+            <th mat-header-cell *matHeaderCellDef>RG</th>
+            <td mat-cell *matCellDef="let usuario">{{usuario.rg}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="permissao">
+            <th mat-header-cell *matHeaderCellDef>Permissão</th>
+            <td mat-cell *matCellDef="let usuario"> {{usuario.permissao}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ativo">
+            <th mat-header-cell *matHeaderCellDef>Ativo</th>
+            <td mat-cell *matCellDef="let usuario">{{usuario.ativo}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+</mat-card>
