@@ -10,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -69,6 +71,10 @@ public class Produto implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	private Movimentacao movimentacao;
+
+	@ManyToOne
+	@JoinColumn(name = "pedido_id")
+	private PedidoVenda pedido;
 
 	public Produto() {
 
@@ -180,6 +186,14 @@ public class Produto implements Serializable {
 
 	public void setMovimentacao(Movimentacao movimentacao) {
 		this.movimentacao = movimentacao;
+	}
+
+	public PedidoVenda getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(PedidoVenda pedido) {
+		this.pedido = pedido;
 	}
 
 }
