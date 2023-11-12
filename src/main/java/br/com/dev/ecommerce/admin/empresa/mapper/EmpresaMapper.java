@@ -17,5 +17,5 @@ public abstract class EmpresaMapper extends Empresa implements Serializable {
 		super(Empresa.class);
 	}
 	
-	public abstract EmpresaDTO setInformacoesEmpresa(Empresa empresa);
+	public abstract EmpresaDTO toDTO(Empresa empresa);
 }

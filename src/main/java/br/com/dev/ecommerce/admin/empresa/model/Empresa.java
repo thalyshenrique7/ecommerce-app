@@ -1,6 +1,7 @@
 package br.com.dev.ecommerce.admin.empresa.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -39,6 +42,12 @@ public class Empresa implements Serializable {
 
 	@Column
 	private boolean matriz = true;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar dataCriacao;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar dataAlteracao;
 
 	public Empresa() {
 
@@ -78,6 +87,22 @@ public class Empresa implements Serializable {
 
 	public void setMatriz(boolean matriz) {
 		this.matriz = matriz;
+	}
+
+	public Calendar getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public void setDataCriacao(Calendar dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+
+	public Calendar getDataAlteracao() {
+		return dataAlteracao;
+	}
+
+	public void setDataAlteracao(Calendar dataAlteracao) {
+		this.dataAlteracao = dataAlteracao;
 	}
 
 }

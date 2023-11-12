@@ -2,24 +2,22 @@ package br.com.dev.ecommerce.admin.entidade.enums;
 
 public enum Status {
 
-	INATIVO(0, "Inativo"), 
-	ATIVO(1, "Ativo"), 
-	EXCLUIDO(2, "Excluido");
-	
-	private int id;
-	
+	INATIVO(0L, "Inativo"), ATIVO(1L, "Ativo"), EXCLUIDO(2L, "Excluido");
+
+	private Long id;
+
 	private String descricao;
-	
-	private Status(int id, String descricao) {
+
+	private Status(Long id, String descricao) {
 		this.id = id;
 		this.descricao = descricao;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

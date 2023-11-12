@@ -3,25 +3,35 @@ package br.com.dev.ecommerce.admin.empresa.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.dev.ecommerce.admin.empresa.dto.EmpresaDTO;
 import br.com.dev.ecommerce.admin.empresa.model.Empresa;
 import br.com.dev.ecommerce.admin.empresa.service.EmpresaServiceImpl;
 
 @RestController
-@RequestMapping("/api/empresa")
+@RequestMapping(value = "/api/empresa", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EmpresaController {
 
 	@Autowired
 	private EmpresaServiceImpl empresaService;
+	
+	@GetMapping(value = "{id}")
+	@ResponseStatus(value = HttpStatus.OK)
+	public EmpresaDTO buscar(@PathVariable(value = "id") Long id) throws Exception {
+		
+		return this.empresaService.buscar(id);
+	}
 
-	@RequestMapping(value = "/salvar", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/salvar")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void salvar(@RequestBody Empresa empresa) {
+	public void salvar(@RequestBody Empresa empresa) throws Exception {
 
 		this.empresaService.salvar(empresa);
 	}

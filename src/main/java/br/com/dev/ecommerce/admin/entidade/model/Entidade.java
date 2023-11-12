@@ -42,15 +42,23 @@ public class Entidade implements Serializable {
 	@Column(length = 50)
 	private String nome;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.REFRESH, CascadeType.DETACH })
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Empresa empresa;
 
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Status status;
+
+	public Entidade() {
+
+	}
+
+	public Entidade(Class<Entidade> class1) {
+
+	}
 
 	public Long getId() {
 		return id;
