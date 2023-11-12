@@ -1,6 +1,7 @@
 package br.com.dev.ecommerce.estoque.service;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 
 import javax.transaction.Transactional;
 
@@ -49,24 +50,24 @@ public class ProdutoServiceImpl implements ProdutoService {
 	@Override
 	public void salvar(Produto produto) {
 
-		if (produto != null) {
+		if (produto != null && BigDecimalUtils.isGreater(produto.getQuantidade(), BigDecimal.ZERO)) {
 
-			if (BigDecimalUtils.isGreater(produto.getQuantidade(), BigDecimal.ZERO)) {
+			/*
+			 * Ao cadastrar um novo produto o tipo da movimentação deve ser Saldo Inicial
+			 */
+			produto.setMovimentacao(Movimentacao.SALDO_INICIAL);
+			produto.setAtivo(true);
+			produto.setDataCriacao(Calendar.getInstance());
+			produto.setDataAlteracao(Calendar.getInstance());
 
-				/*
-				 * Ao cadastrar um novo produto o tipo da movimentação deve ser Saldo Inicial
-				 */
-				produto.setMovimentacao(Movimentacao.SALDO_INICIAL);
-				produto.setAtivo(true);
+			try {
 
-				try {
+				this.produtoRepository.save(produto);
 
-					this.produtoRepository.save(produto);
-
-				} catch (EstoqueException e) {
-					throw new EstoqueException("Saldo Inicial para o produto deve ser maior que 0.");
-				}
+			} catch (EstoqueException e) {
+				throw new EstoqueException("Saldo Inicial para o produto deve ser maior que 0.");
 			}
+
 		}
 	}
 
@@ -81,12 +82,10 @@ public class ProdutoServiceImpl implements ProdutoService {
 	@Override
 	public void atualizar(Long id, Produto produto) {
 
-		if (id != null) {
+		if (id != null && !BigDecimalUtils.isLess(produto.getQuantidade(), BigDecimal.ZERO)) {
 
-			if (!BigDecimalUtils.isLess(produto.getQuantidade(), BigDecimal.ZERO)) {
-
-				produto.setId(id);
-			}
+			produto.setId(id);
+			produto.setDataAlteracao(Calendar.getInstance());
 		}
 
 		try {

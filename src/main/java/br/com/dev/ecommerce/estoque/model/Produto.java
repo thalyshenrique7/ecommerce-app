@@ -2,6 +2,7 @@ package br.com.dev.ecommerce.estoque.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,9 +11,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.envers.Audited;
@@ -72,9 +73,11 @@ public class Produto implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Movimentacao movimentacao;
 
-	@ManyToOne
-	@JoinColumn(name = "pedido_id")
-	private PedidoVenda pedido;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar dataCriacao;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar dataAlteracao;
 
 	public Produto() {
 
@@ -188,12 +191,20 @@ public class Produto implements Serializable {
 		this.movimentacao = movimentacao;
 	}
 
-	public PedidoVenda getPedido() {
-		return pedido;
+	public Calendar getDataCriacao() {
+		return dataCriacao;
 	}
 
-	public void setPedido(PedidoVenda pedido) {
-		this.pedido = pedido;
+	public void setDataCriacao(Calendar dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+
+	public Calendar getDataAlteracao() {
+		return dataAlteracao;
+	}
+
+	public void setDataAlteracao(Calendar dataAlteracao) {
+		this.dataAlteracao = dataAlteracao;
 	}
 
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.dev.ecommerce.estoque.dto.PedidoVendaDTO;
 import br.com.dev.ecommerce.estoque.model.PedidoVenda;
 import br.com.dev.ecommerce.estoque.service.PedidoVendaServiceImpl;
 
@@ -28,9 +29,9 @@ public class PedidoVendaController {
 
 	@RequestMapping(value = "/efetuar", method = RequestMethod.POST, produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
-	public void efetuar(@RequestBody PedidoVenda pedido) {
+	public void efetuar(@RequestBody PedidoVendaDTO pedidoDTO) {
 
-		pedidoService.efetuar(pedido);
+		pedidoService.efetuar(pedidoDTO);
 	}
 
 	@RequestMapping(value = "/cancelar/{id}", method = RequestMethod.DELETE, produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
@@ -39,6 +40,6 @@ public class PedidoVendaController {
 
 		PedidoVenda pedido = this.pedidoService.buscar(id);
 
-		pedidoService.efetuar(pedido);
+		pedidoService.cancelar(pedido);
 	}
 }
