@@ -2,7 +2,6 @@ package br.com.dev.ecommerce.estoque.dto;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import br.com.dev.ecommerce.estoque.model.Produto;
@@ -21,8 +20,6 @@ public class PedidoVendaDTO {
 
 	private String terceiroNome;
 
-	private Calendar dataSaida;
-
 	public BigDecimal getValorTotal() {
 		return valorTotal;
 	}
@@ -40,10 +37,10 @@ public class PedidoVendaDTO {
 	}
 
 	public List<Produto> getProdutos() {
-		
+
 		if (produtos == null)
 			produtos = new ArrayList<>();
-		
+
 		return produtos;
 	}
 
@@ -73,14 +70,6 @@ public class PedidoVendaDTO {
 
 	public void setTerceiroNome(String terceiroNome) {
 		this.terceiroNome = terceiroNome;
-	}
-
-	public Calendar getDataSaida() {
-		return dataSaida;
-	}
-
-	public void setDataSaida(Calendar dataSaida) {
-		this.dataSaida = dataSaida;
 	}
 
 }

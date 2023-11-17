@@ -1,5 +1,7 @@
 package br.com.dev.ecommerce.admin.entidade.service;
 
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +41,9 @@ public class EntidadeServiceImpl implements EntidadeService {
 	public void salvar(Entidade entidade) {
 
 		if (entidade != null) {
+			
+			entidade.setDataCriacao(Calendar.getInstance());
+			entidade.setDataAlteracao(Calendar.getInstance());
 
 			try {
 
