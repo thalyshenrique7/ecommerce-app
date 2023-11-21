@@ -6,11 +6,11 @@ public enum Movimentacao {
 
 	private Long id;
 
-	private String tipo;
+	private String descricao;
 
-	private Movimentacao(Long id, String tipo) {
+	private Movimentacao(Long id, String descricao) {
 		this.id = id;
-		this.tipo = tipo;
+		this.descricao = descricao;
 	}
 
 	public Long getId() {
@@ -21,12 +21,12 @@ public enum Movimentacao {
 		this.id = id;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 }

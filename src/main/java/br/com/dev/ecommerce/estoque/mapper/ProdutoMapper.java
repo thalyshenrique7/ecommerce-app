@@ -16,6 +16,6 @@ public abstract class ProdutoMapper extends Produto implements Serializable {
 
 		super(Produto.class);
 	}
-	
-	public abstract ProdutoDTO setInformacoesProduto(Produto produto);
+
+	public abstract ProdutoDTO toDTO(Produto produto);
 }

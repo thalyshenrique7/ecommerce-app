@@ -2,6 +2,7 @@ package br.com.dev.ecommerce.estoque.service;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -14,7 +15,6 @@ import br.com.dev.ecommerce.estoque.exception.NotFoundException;
 import br.com.dev.ecommerce.estoque.mapper.ProdutoMapper;
 import br.com.dev.ecommerce.estoque.model.Produto;
 import br.com.dev.ecommerce.estoque.repository.ProdutoRepository;
-import br.com.dev.ecommerce.estoque.repository.ProdutoRepositoryCustom;
 import br.com.dev.ecommerce.utils.BigDecimalUtils;
 
 @Service
@@ -25,9 +25,6 @@ public class ProdutoServiceImpl implements ProdutoService {
 
 	@Autowired
 	private ProdutoMapper produtoMapper;
-
-	@Autowired
-	private ProdutoRepositoryCustom produtoRepositoryCustom;
 
 	@Override
 	public Produto buscar(Long id) {
@@ -42,7 +39,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 			throw new EstoqueException("Produto não encontrado no sistema.");
 		}
 
-		produtoMapper.setInformacoesProduto(produtoId);
+		produtoMapper.toDTO(produtoId);
 
 		return produtoId;
 	}
@@ -59,6 +56,9 @@ public class ProdutoServiceImpl implements ProdutoService {
 			produto.setAtivo(true);
 			produto.setDataCriacao(Calendar.getInstance());
 			produto.setDataAlteracao(Calendar.getInstance());
+			
+			if (this.produtoRepository.verificarCodigoBarras(produto.getCodigoBarras(), produto))
+				throw new EstoqueException("Ocorreu um erro ao tentar salvar o produto. Código de barras já existe.");
 
 			try {
 
@@ -90,11 +90,22 @@ public class ProdutoServiceImpl implements ProdutoService {
 
 		try {
 
-			this.produtoRepositoryCustom.merge(produto);
+			this.getRepository().merge(produto);
 
 		} catch (NotFoundException e) {
 			throw new EstoqueException("Ocorreu um problema ao tentar salvar o produto.");
 		}
+	}
+
+	@Override
+	public List<Produto> getProdutos() {
+
+		return this.getRepository().getProdutos();
+	}
+
+	private ProdutoRepository getRepository() {
+
+		return (ProdutoRepository) this.produtoRepository;
 	}
 
 }

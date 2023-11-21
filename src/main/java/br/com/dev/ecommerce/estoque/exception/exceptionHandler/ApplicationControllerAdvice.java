@@ -38,7 +38,7 @@ public class ApplicationControllerAdvice {
 	}
 	
 	@ExceptionHandler(EstoqueException.class)
-	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ListaErros handleEstoqueException(EstoqueException e) {
 		String erro = e.getMessage();
 		Calendar data = Calendar.getInstance();

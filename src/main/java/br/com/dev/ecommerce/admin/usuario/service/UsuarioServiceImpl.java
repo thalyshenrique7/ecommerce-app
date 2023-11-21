@@ -27,10 +27,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 			usuario = this.usuarioRepository.findById(id).orElse(null);
 
 		} catch (Exception e) {
-			throw e;
+			throw new RuntimeException("Usuário não foi encontrado no sistema.", e);
 		}
 
-		UsuarioDTO dto = this.usuarioMapper.setInformacoesUsuario(usuario);
+		UsuarioDTO dto = this.usuarioMapper.toDTO(usuario);
 
 		return dto;
 	}
@@ -45,7 +45,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 				usuarioRepository.save(usuario);
 
 			} catch (Exception e) {
-				throw e;
+				throw new RuntimeException("Ocorreu um erro ao tentar salvar o usuário.", e);
 
 			}
 		}
@@ -61,7 +61,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 				usuarioRepository.delete(usuario);
 
 			} catch (Exception e) {
-				throw e;
+				throw new RuntimeException("Usuário não foi encontrado no sistema.", e);
 			}
 		}
 	}
@@ -78,7 +78,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 				usuario = this.usuarioRepository.findById(id).orElse(null);
 
 			} catch (Exception e) {
-				throw e;
+				throw new RuntimeException("Usuário não foi encontrado no sistema.", e);
 			}
 
 			/*

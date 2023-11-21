@@ -37,7 +37,7 @@ public class TerceiroServiceImpl implements TerceiroService {
 	public void salvar(Terceiro terceiro) {
 
 		if (terceiro != null) {
-			
+
 			terceiro.setDataCriacao(Calendar.getInstance());
 			terceiro.setDataAlteracao(Calendar.getInstance());
 
@@ -48,6 +48,47 @@ public class TerceiroServiceImpl implements TerceiroService {
 			} catch (Exception e) {
 				throw new RuntimeException("Ocorreu um erro ao tentar salvar o terceiro.", e);
 			}
+		}
+	}
+
+	@Override
+	public void excluir(Long id) {
+
+		if (id != null) {
+
+			Terceiro terceiro;
+
+			try {
+
+				terceiro = this.terceiroRepository.findById(id).orElse(null);
+
+			} catch (Exception e) {
+				throw new RuntimeException("O terceiro não foi encontrado no sistema.", e);
+			}
+
+			this.terceiroRepository.delete(terceiro);
+		}
+	}
+
+	@Override
+	public void atualizar(Long id, Terceiro novoTerceiro) {
+
+		if (id != null) {
+
+			Terceiro terceiro;
+
+			try {
+
+				terceiro = this.terceiroRepository.findById(id).orElse(null);
+
+			} catch (Exception e) {
+				throw new RuntimeException("O terceiro não foi encontrado no sistema.", e);
+			}
+
+			terceiro.setNome(novoTerceiro.getNome());
+			terceiro.setDataAlteracao(Calendar.getInstance());
+
+			this.terceiroRepository.save(terceiro);
 		}
 	}
 

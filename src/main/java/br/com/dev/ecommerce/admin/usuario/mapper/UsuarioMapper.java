@@ -17,5 +17,5 @@ public abstract class UsuarioMapper extends Usuario implements Serializable {
 		super(Usuario.class);
 	}
 	
-	public abstract UsuarioDTO setInformacoesUsuario(Usuario usuario);
+	public abstract UsuarioDTO toDTO(Usuario usuario);
 }

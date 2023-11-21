@@ -65,5 +65,14 @@ public class ProdutoDTO {
 	public void setMovimentacao(Movimentacao movimentacao) {
 		this.movimentacao = movimentacao;
 	}
+	
+	public String movimentacaoDescricao() {
+		
+		if (movimentacao != null) {
+			return movimentacao.getDescricao();
+		}
+		
+		return "";
+	}
 
 }
