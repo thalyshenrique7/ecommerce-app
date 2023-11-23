@@ -14,19 +14,19 @@ export class ProdutoService {
   ) { }
 
   buscar(id: number): Observable<any> {
-    return this.http.get(`${this.PATH}/buscar/${id}`);
+    return this.http.get(`${this.PATH}/${id}`);
   }
 
   salvar(produto: any): Observable<any> {
-    return this.http.post(`${this.PATH}/salvar`, produto);
+    return this.http.post(`${this.PATH}`, produto);
   }
 
   excluir(id: number): Observable<any> {
-    return this.http.delete(`${this.PATH}/excluir/${id}`);
+    return this.http.delete(`${this.PATH}/${id}`);
   }
 
   atualizar(id: number, novoProduto: any): Observable<any> {
-    return this.http.put(`${this.PATH}/atualizar/${id}`, novoProduto);
+    return this.http.put(`${this.PATH}/${id}`, novoProduto);
   }
 
   getProdutos(): Observable<any> {

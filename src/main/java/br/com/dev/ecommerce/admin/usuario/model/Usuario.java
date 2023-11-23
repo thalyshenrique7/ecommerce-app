@@ -39,10 +39,14 @@ public class Usuario implements Serializable {
 	private Permissao permissao;
 
 	@Column(nullable = false)
-	private boolean ativo;
+	private boolean ativo = true;
 
 	@Transient
 	private boolean logado;
+
+	private String email;
+
+	private String senha;
 
 	public Usuario() {
 
@@ -106,6 +110,22 @@ public class Usuario implements Serializable {
 
 	public void setLogado(boolean logado) {
 		this.logado = logado;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 }

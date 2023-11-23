@@ -17,6 +17,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Autowired
 	private UsuarioMapper usuarioMapper;
 
+//	@Autowired
+//	private PasswordEncoder passwordEncoder;
+
 	@Override
 	public UsuarioDTO buscar(Long id) {
 
@@ -52,9 +55,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public void excluir(Usuario usuario) {
+	public void excluir(Long id) {
 
-		if (usuario != null) {
+		if (id != null) {
+
+			Usuario usuario = this.usuarioRepository.findById(id).orElse(null);
 
 			try {
 
@@ -92,4 +97,5 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 		}
 	}
+
 }

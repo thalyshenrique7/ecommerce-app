@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService } from './login.service';
 
 export interface LoginForm {
 
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private loginService: LoginService,
   ) { }
 
   ngOnInit(): void {
@@ -35,7 +37,16 @@ export class LoginComponent implements OnInit {
   }
 
   acessarTelaLogin() {
-    alert("OK");
+
+    const email = this.getInformacoesLogin().email;
+    const senha = this.getInformacoesLogin().senha;
+
+    this.loginService.acessar(email.value, senha.value).subscribe(
+      token => {
+        alert(token);
+        this.router.navigate(['/produto']);
+      },
+    )
   }
 
 }

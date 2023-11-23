@@ -3,14 +3,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { LoginComponent } from './login/login.component';
-import { LoginService } from './login/login.service';
-import { UsuarioComponent } from './usuario/usuario.component';
+import { DashboardComponent } from './dashboard.component';
 
 @NgModule({
     declarations: [
-        UsuarioComponent,
-        LoginComponent
+        DashboardComponent
     ],
     imports: [
         BrowserModule,
@@ -19,11 +16,9 @@ import { UsuarioComponent } from './usuario/usuario.component';
         ReactiveFormsModule,
     ],
     providers: [
-        LoginService
     ],
     exports: [
-        UsuarioComponent,
-        LoginComponent,
+        DashboardComponent
     ]
 })
-export class AdminModule { }
+export class DashboardModule { }

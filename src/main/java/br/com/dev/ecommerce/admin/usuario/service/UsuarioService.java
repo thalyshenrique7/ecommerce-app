@@ -9,7 +9,8 @@ public interface UsuarioService {
 
 	void salvar(Usuario usuario);
 
-	void excluir(Usuario usuario);
+	void excluir(Long id);
 
 	void atualizar(Long id, Usuario novoUsuario);
+
 }

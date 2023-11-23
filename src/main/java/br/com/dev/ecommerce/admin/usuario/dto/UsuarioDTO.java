@@ -1,6 +1,8 @@
 package br.com.dev.ecommerce.admin.usuario.dto;
 
-public class UsuarioDTO {
+import br.com.dev.ecommerce.dto.AbstractDTO;
+
+public class UsuarioDTO extends AbstractDTO {
 
 	private String nome;
 
