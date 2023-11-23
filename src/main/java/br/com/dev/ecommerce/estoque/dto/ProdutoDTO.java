@@ -2,12 +2,12 @@ package br.com.dev.ecommerce.estoque.dto;
 
 import java.math.BigDecimal;
 
-import br.com.dev.ecommerce.estoque.enums.Movimentacao;
+import br.com.dev.ecommerce.dto.AbstractDTO;
 
-public class ProdutoDTO {
+public class ProdutoDTO extends AbstractDTO {
 
 	private String nome;
-
+	
 	private String ncm;
 
 	private String codigoBarras;
@@ -16,7 +16,7 @@ public class ProdutoDTO {
 
 	private BigDecimal precoVenda;
 
-	private Movimentacao movimentacao;
+	private String movimentacaoDescricao;
 
 	public String getNome() {
 		return nome;
@@ -58,21 +58,12 @@ public class ProdutoDTO {
 		this.precoVenda = precoVenda;
 	}
 
-	public Movimentacao getMovimentacao() {
-		return movimentacao;
+	public String getMovimentacaoDescricao() {
+		return movimentacaoDescricao;
 	}
 
-	public void setMovimentacao(Movimentacao movimentacao) {
-		this.movimentacao = movimentacao;
-	}
-	
-	public String movimentacaoDescricao() {
-		
-		if (movimentacao != null) {
-			return movimentacao.getDescricao();
-		}
-		
-		return "";
+	public void setMovimentacaoDescricao(String movimentacaoDescricao) {
+		this.movimentacaoDescricao = movimentacaoDescricao;
 	}
 
 }

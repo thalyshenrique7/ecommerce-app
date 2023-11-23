@@ -29,4 +29,8 @@ export class ProdutoService {
     return this.http.put(`${this.PATH}/atualizar/${id}`, novoProduto);
   }
 
+  getProdutos(): Observable<any> {
+    return this.http.get(`${this.PATH}`);
+  }
+
 }

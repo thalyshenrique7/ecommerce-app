@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.dev.ecommerce.estoque.dto.ProdutoDTO;
 import br.com.dev.ecommerce.estoque.enums.Movimentacao;
 import br.com.dev.ecommerce.estoque.exception.EstoqueException;
 import br.com.dev.ecommerce.estoque.exception.NotFoundException;
@@ -27,7 +28,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 	private ProdutoMapper produtoMapper;
 
 	@Override
-	public Produto buscar(Long id) {
+	public ProdutoDTO buscar(Long id) {
 
 		Produto produtoId;
 
@@ -39,9 +40,9 @@ public class ProdutoServiceImpl implements ProdutoService {
 			throw new EstoqueException("Produto não encontrado no sistema.");
 		}
 
-		produtoMapper.toDTO(produtoId);
+		ProdutoDTO dto = produtoMapper.toDTO(produtoId);
 
-		return produtoId;
+		return dto;
 	}
 
 	@Override
@@ -56,7 +57,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 			produto.setAtivo(true);
 			produto.setDataCriacao(Calendar.getInstance());
 			produto.setDataAlteracao(Calendar.getInstance());
-			
+
 			if (this.produtoRepository.verificarCodigoBarras(produto.getCodigoBarras(), produto))
 				throw new EstoqueException("Ocorreu um erro ao tentar salvar o produto. Código de barras já existe.");
 
@@ -72,7 +73,23 @@ public class ProdutoServiceImpl implements ProdutoService {
 	}
 
 	@Override
-	public void excluir(Produto produto) {
+	public void excluir(Long id) {
+		
+		ProdutoDTO dto = null;
+		
+		if (id != null) {
+			
+			try {
+				
+				dto = this.buscar(id);
+				
+			} catch (Exception e) {
+				throw new RuntimeException("Produto não foi encontrado no sistema.", e);
+			}
+			
+		}
+		
+		Produto produto = this.produtoMapper.toEntity(dto);
 
 		this.produtoRepository.delete(produto);
 
@@ -98,9 +115,13 @@ public class ProdutoServiceImpl implements ProdutoService {
 	}
 
 	@Override
-	public List<Produto> getProdutos() {
+	public List<ProdutoDTO> getProdutos() {
 
-		return this.getRepository().getProdutos();
+		List<Produto> produtos = this.getRepository().getProdutos();
+
+		List<ProdutoDTO> dtos = this.produtoMapper.toDTOs(produtos);
+
+		return dtos;
 	}
 
 	private ProdutoRepository getRepository() {

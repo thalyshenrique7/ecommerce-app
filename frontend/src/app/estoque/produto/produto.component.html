@@ -1,3 +1,31 @@
 <div>
-    <h1>Produto</h1>
+    <h1>Produtos</h1>
+
+    <div *ngIf="produtos && produtos.length > 0">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>NCM</th>
+                    <th>Código de Barras</th>
+                    <th>Preço de Custo</th>
+                    <th>Preço de Venda</th>
+                    <th>Descrição de Movimentação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let produto of produtos">
+                    <td>{{ produto.nome }}</td>
+                    <td>{{ produto.ncm }}</td>
+                    <td>{{ produto.codigoBarras }}</td>
+                    <td>{{ produto.precoCusto | currency:'BRL':'symbol' }}</td>
+                    <td>{{ produto.precoVenda | currency:'BRL':'symbol' }}</td>
+                    <td>{{ produto.movimentacaoDescricao }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
 </div>
