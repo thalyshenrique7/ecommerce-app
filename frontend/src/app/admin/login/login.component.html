@@ -1,0 +1,52 @@
+<div class="container-login">
+
+    <div class="container-login-central">
+
+        <div class="container-header">
+            <div class="titulo-login">
+                TH Imports
+            </div>
+            <div class="info-login">
+                Seja bem-vindo
+            </div>
+        </div>
+
+        <div class="container-form">
+            <form class="form-inputs" [formGroup]="form" (submit)="acessarTelaLogin()">
+                <div class="group-input">
+                    <div class="text-info">
+                        Email
+                    </div>
+                    <input class="input-form" type="text" name="email" id="email" placeholder="E-mail"
+                        formControlName="email" required="">
+
+                    <label *ngIf="form.get('email')?.errors?.['required'] && form.get('email')?.touched"
+                        class="error-input">
+                        Campo Obrigatório
+                    </label>
+
+                </div>
+
+                <div class="group-input">
+                    <div class="text-info">
+                        Senha
+                    </div>
+                    <input class="input-form" type="password" name="senha" id="senha" placeholder="Senha"
+                        formControlName="senha" required="">
+
+                    <label *ngIf="form.get('senha')?.errors?.['required'] && form.get('senha')?.touched"
+                        class="error-input">
+                        Campo Obrigatório
+                    </label>
+
+                </div>
+
+                <div class="group-input">
+                    <input type="submit" class="btn-login" value="Acessar" [ngClass]="{'disabled' : !form.valid}"
+                        disabled="!form.valid">
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

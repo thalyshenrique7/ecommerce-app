@@ -1,26 +1,28 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { PedidovendaComponent } from './pedidovenda/pedidovenda.component';
-import { ProdutoComponent } from './produto/produto.component';
-import { ProdutoService } from './produto/produto.service';
+import { LoginComponent } from './login/login.component';
+import { UsuarioComponent } from './usuario/usuario.component';
 
 @NgModule({
     declarations: [
-        ProdutoComponent,
-        PedidovendaComponent,
+        UsuarioComponent,
+        LoginComponent
     ],
     imports: [
         BrowserModule,
         HttpClientModule,
         CommonModule,
+        ReactiveFormsModule,
     ],
     providers: [
-        ProdutoService
+
     ],
     exports: [
-        ProdutoComponent
+        UsuarioComponent,
+        LoginComponent,
     ]
 })
-export class EstoqueModule { }
+export class AdminModule { }
