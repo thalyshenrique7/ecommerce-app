@@ -1,15 +1,14 @@
 > Status: Em desenvolvimento ⚠️
 
-Requisitos não funcionais:
-- Oracle Database
++ O intuito desse projeto é praticar mais o Angular e Typescript, pois meu foco sempre foi backend e com isso possuo pouco conhecimento sobre a área de frontend. No trabalho atuo em demandas que exigem conhecimentos no frontend, então estou me esforçando para melhorar meus conhecimentos nesta área e conseguir entregar as demandas com um código de qualidade.
 
-Requisitos funcionais:
+### Informações sobre as APIs se encontram dentro da pasta 'apidocumentacao';
 
-Produto
-- Código de barras único para cada produto
-- Quantidade do estoque não pode ser menor que 0
-- Saldo inicial do produto deve ser maior que 0
-- Tipo Saldo Inicial deve ser registrado ao produto apenas no momento do cadastro não podendo ser editado
+> Telas
+
++ Login
+
+![login](https://github.com/thalyshenrique7/ecommerce/assets/100730757/307c0203-f0d0-4251-bf02-db4b5959dc75)
 
 > Tecnologias:
 
