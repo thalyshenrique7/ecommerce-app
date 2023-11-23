@@ -10,6 +10,10 @@
 
 ![login](https://github.com/thalyshenrique7/ecommerce/assets/100730757/307c0203-f0d0-4251-bf02-db4b5959dc75)
 
++ Cadastro de Produtos
+
+![cadastro_produtos](https://github.com/thalyshenrique7/ecommerce/assets/100730757/eb8b4a97-68b5-4d82-8eb4-ec561ffd337a)
+
 > Tecnologias:
 
 <table>
