@@ -9,7 +9,15 @@
 body {
     font-family: "Poppins";
     margin: 0;
-    background: #27ae60;
+    background: #00806e;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
