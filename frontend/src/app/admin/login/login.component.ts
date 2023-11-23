@@ -41,12 +41,15 @@ export class LoginComponent implements OnInit {
     const email = this.getInformacoesLogin().email;
     const senha = this.getInformacoesLogin().senha;
 
-    this.loginService.acessar(email.value, senha.value).subscribe(
-      token => {
-        alert(token);
-        this.router.navigate(['/produto']);
-      },
-    )
+    console.log('form', this.form.valid)
+
+    if (this.form.valid) {
+      this.loginService.acessar(email.value, senha.value).subscribe(
+        dados => {
+          this.router.navigate(['/produto']);
+        },
+      )
+    }
   }
 
 }
