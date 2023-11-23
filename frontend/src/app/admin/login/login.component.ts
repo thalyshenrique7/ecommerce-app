@@ -41,13 +41,14 @@ export class LoginComponent implements OnInit {
     const email = this.getInformacoesLogin().email;
     const senha = this.getInformacoesLogin().senha;
 
-    console.log('form', this.form.valid)
-
     if (this.form.valid) {
       this.loginService.acessar(email.value, senha.value).subscribe(
         dados => {
-          this.router.navigate(['/produto']);
+          this.router.navigate(['/dashboard']);
         },
+        (error) => {
+          alert('Ocorreu um erro ao tentar realizar o login.');
+        }
       )
     }
   }

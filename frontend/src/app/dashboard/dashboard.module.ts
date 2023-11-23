@@ -1,24 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { SharedModule } from '../shared/shared.module';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 
 @NgModule({
     declarations: [
-        DashboardComponent
+        DashboardComponent,
     ],
     imports: [
-        BrowserModule,
-        HttpClientModule,
         CommonModule,
-        ReactiveFormsModule,
-    ],
-    providers: [
+        DashboardRoutingModule,
+        SharedModule,
     ],
     exports: [
-        DashboardComponent
+        DashboardComponent,
     ]
 })
 export class DashboardModule { }

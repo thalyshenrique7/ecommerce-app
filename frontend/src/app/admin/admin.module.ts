@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { AdminRoutingModule } from './admin-routing.module';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
 import { UsuarioComponent } from './usuario/usuario.component';
@@ -17,6 +18,7 @@ import { UsuarioComponent } from './usuario/usuario.component';
         HttpClientModule,
         CommonModule,
         ReactiveFormsModule,
+        AdminRoutingModule,
     ],
     providers: [
         LoginService

@@ -1,31 +1,80 @@
-<div>
-    <h1>Produtos</h1>
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
 
-    <div *ngIf="produtos && produtos.length > 0">
-        <table>
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>NCM</th>
-                    <th>Código de Barras</th>
-                    <th>Preço de Custo</th>
-                    <th>Preço de Venda</th>
-                    <th>Descrição de Movimentação</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let produto of produtos">
-                    <td>{{ produto.nome }}</td>
-                    <td>{{ produto.ncm }}</td>
-                    <td>{{ produto.codigoBarras }}</td>
-                    <td>{{ produto.precoCusto | currency:'BRL':'symbol' }}</td>
-                    <td>{{ produto.precoVenda | currency:'BRL':'symbol' }}</td>
-                    <td>{{ produto.movimentacaoDescricao }}</td>
-                </tr>
-            </tbody>
-        </table>
+<div class="container-base">
+
+    <div class="content-page">
+        <div class="card-header">
+            <div class="card-title">
+                Cadastro de Produtos
+            </div>
+        </div>
+
+        <form class="form-page" [formGroup]="form" (submit)="enviar()">
+
+            <div class="row">
+                <div class="group-row">
+                    <label>Nome</label>
+                    <input type="text" name="name" id="name" formControlName="nome" required />
+                    <label class="error-input" *ngIf="form.get('nome')?.errors?.['required'] &&
+                    form.get('nome')?.touched">
+                        Campo Obrigatório!
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="group-row">
+                    <label>NCM</label>
+                    <input type="text" name="name" id="ncm" formControlName="ncm" required />
+                    <label class="error-input" *ngIf="form.get('ncm')?.errors?.['required'] &&
+                    form.get('ncm')?.touched">
+                        Campo Obrigatório!
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="group-row">
+                    <label>Código de barras</label>
+                    <input type="text" name="codigoBarras" id="codigoBarras" formControlName="codigoBarras" required />
+                    <label class="error-input" *ngIf="form.get('codigoBarras')?.errors?.['required'] &&
+                    form.get('codigoBarras')?.touched">
+                        Campo Obrigatório!
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="group-row">
+                    <label>Preço de custo</label>
+                    <input type="text" name="precoCusto" id="precoCusto" formControlName="precoCusto" required />
+                    <label class="error-input" *ngIf="form.get('precoCusto')?.errors?.['required'] &&
+                    form.get('precoCusto')?.touched">
+                        Campo Obrigatório!
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="group-row">
+                    <label>Preço de venda</label>
+                    <input type="text" name="precoVenda" id="precoVenda" formControlName="precoVenda" required />
+                    <label class="error-input" *ngIf="form.get('precoVenda')?.errors?.['required'] &&
+                    form.get('precoVenda')?.touched">
+                        Campo Obrigatório!
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="group-row">
+                    <input type="submit" value="Salvar" class="btn-primary" />
+                </div>
+            </div>
+
+        </form>
+
     </div>
-
-
 
 </div>
