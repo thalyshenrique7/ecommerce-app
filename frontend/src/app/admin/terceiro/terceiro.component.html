@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+
+<div class="container-base">
+
+    <div class="content-page">
+        <div class="card-header">
+            <div class="card-title">
+                Cadastro de Terceiro
+            </div>
+        </div>
+
+        <form class="form-page" [formGroup]="form" (submit)="salvar()">
+
+            <div class="row">
+                <div class="group-row">
+                    <label>Nome</label>
+                    <input type="text" name="nome" id="nome" formControlName="nome" required />
+                    <label class="error-input" *ngIf="form.get('nome')?.errors?.['required'] &&
+                    form.get('nome')?.touched">
+                        Campo Obrigatório!
+                    </label>
+                </div>
+            </div>
+
+            <!-- <div class="row">
+                <div class="group-row">
+                    <label>Empresas</label>
+                    <ng-select class="select-padrao" [items]="empresas" bindLabel="nome" [multiple]="false"
+                        [clearable]="false" [searchable]="false"></ng-select>
+                </div>
+            </div> -->
+
+
+            <div class="row">
+                <div class="group-row">
+                    <input type="submit" value="Salvar" class="btn-primary" />
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

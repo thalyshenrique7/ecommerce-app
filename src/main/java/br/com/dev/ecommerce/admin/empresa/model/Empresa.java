@@ -37,6 +37,8 @@ public class Empresa implements Serializable {
 
 	private String nome;
 
+	private String cnpj;
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
 
@@ -71,6 +73,14 @@ public class Empresa implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
 	}
 
 	public Endereco getEndereco() {

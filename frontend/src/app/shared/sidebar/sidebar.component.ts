@@ -22,7 +22,7 @@ export class SidebarComponent {
         break;
 
       case 2:
-        this.router.navigate(['/usuario']);
+        this.router.navigate(['/terceiro']);
         break;
 
       case 3:

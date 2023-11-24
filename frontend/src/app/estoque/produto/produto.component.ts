@@ -35,7 +35,7 @@ export class ProdutoComponent implements OnInit {
 
     ngOnInit(): void {
 
-        this.menuService.menuSelecionado = 2;
+        this.menuService.menuSelecionado = 4;
 
         this.form = this.fb.group<ProdutoForm>({
             nome: this.fb.control('', Validators.required),
