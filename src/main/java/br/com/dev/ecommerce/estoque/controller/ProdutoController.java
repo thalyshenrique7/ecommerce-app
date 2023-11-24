@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.dev.ecommerce.estoque.dto.ProdutoDTO;
-import br.com.dev.ecommerce.estoque.model.Produto;
+import br.com.dev.ecommerce.estoque.dto.ProdutoDetalheDTO;
 import br.com.dev.ecommerce.estoque.service.ProdutoServiceImpl;
 
 @RestController
@@ -28,14 +28,14 @@ public class ProdutoController {
 	private ProdutoServiceImpl produtoService;
 
 	@GetMapping(value = "{id}")
-	public ResponseEntity<ProdutoDTO> buscar(@PathVariable(value = "id") Long id) {
+	public ResponseEntity<ProdutoDetalheDTO> buscar(@PathVariable(value = "id") Long id) {
 
 		return ResponseEntity.status(HttpStatus.OK).body(this.produtoService.buscar(id));
 	}
 
 	@PostMapping(value = "/salvar")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void salvar(@RequestBody Produto produto) {
+	public void salvar(@RequestBody ProdutoDTO produto) {
 
 		this.produtoService.salvar(produto);
 	}
@@ -49,13 +49,13 @@ public class ProdutoController {
 
 	@PutMapping(value = "/atualizar/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public void atualizar(@PathVariable(value = "id") Long id, @RequestBody Produto produto) {
+	public void atualizar(@PathVariable(value = "id") Long id, @RequestBody ProdutoDTO produto) {
 
 		this.produtoService.atualizar(id, produto);
 	}
 
 	@GetMapping
-	public ResponseEntity<List<ProdutoDTO>> getProdutos() {
+	public ResponseEntity<List<ProdutoDetalheDTO>> getProdutos() {
 
 		return ResponseEntity.status(HttpStatus.OK).body(this.produtoService.getProdutos());
 	}

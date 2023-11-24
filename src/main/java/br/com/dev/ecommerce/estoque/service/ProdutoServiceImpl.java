@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.dev.ecommerce.estoque.dto.ProdutoDTO;
+import br.com.dev.ecommerce.estoque.dto.ProdutoDetalheDTO;
 import br.com.dev.ecommerce.estoque.enums.Movimentacao;
 import br.com.dev.ecommerce.estoque.exception.EstoqueException;
 import br.com.dev.ecommerce.estoque.exception.NotFoundException;
@@ -28,7 +29,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 	private ProdutoMapper produtoMapper;
 
 	@Override
-	public ProdutoDTO buscar(Long id) {
+	public ProdutoDetalheDTO buscar(Long id) {
 
 		Produto produtoId;
 
@@ -40,74 +41,76 @@ public class ProdutoServiceImpl implements ProdutoService {
 			throw new EstoqueException("Produto não encontrado no sistema.");
 		}
 
-		ProdutoDTO dto = produtoMapper.toDTO(produtoId);
+		ProdutoDetalheDTO dto = produtoMapper.toDetalheDTO(produtoId);
 
 		return dto;
 	}
 
 	@Override
-	public void salvar(Produto produto) {
+	public void salvar(ProdutoDTO dto) {
 
-		if (produto != null && BigDecimalUtils.isGreater(produto.getQuantidade(), BigDecimal.ZERO)) {
+		Produto produto = null;
+
+		if (dto != null && BigDecimalUtils.isGreater(dto.getQuantidade(), BigDecimal.ZERO)) {
 
 			/*
 			 * Ao cadastrar um novo produto o tipo da movimentação deve ser Saldo Inicial
 			 */
-			produto.setMovimentacao(Movimentacao.SALDO_INICIAL);
-			produto.setAtivo(true);
-			produto.setDataCriacao(Calendar.getInstance());
-			produto.setDataAlteracao(Calendar.getInstance());
+			dto.setMovimentacao(Movimentacao.SALDO_INICIAL);
+			dto.setAtivo(true);
+			dto.setDataCriacao(Calendar.getInstance());
+			dto.setDataAlteracao(Calendar.getInstance());
 
-			if (this.produtoRepository.verificarCodigoBarras(produto.getCodigoBarras(), produto))
+			if (this.produtoRepository.verificarCodigoBarras(dto.getCodigoBarras(), dto))
 				throw new EstoqueException("Ocorreu um erro ao tentar salvar o produto. Código de barras já existe.");
+
+			produto = this.produtoMapper.toEntity(dto);
 
 			try {
 
-				this.produtoRepository.save(produto);
+				this.getRepository().save(produto);
 
 			} catch (EstoqueException e) {
 				throw new EstoqueException("Saldo Inicial para o produto deve ser maior que 0.");
 			}
-
 		}
 	}
 
 	@Override
 	public void excluir(Long id) {
-		
+
 		ProdutoDTO dto = null;
-		
+
 		if (id != null) {
-			
+
 			try {
-				
-				dto = this.buscar(id);
-				
+
+				dto = this.getRepository().getDTO(id);
+
 			} catch (Exception e) {
 				throw new RuntimeException("Produto não foi encontrado no sistema.", e);
 			}
-			
+
 		}
-		
+
 		Produto produto = this.produtoMapper.toEntity(dto);
 
 		this.produtoRepository.delete(produto);
-
 	}
 
 	@Transactional
 	@Override
-	public void atualizar(Long id, Produto produto) {
+	public void atualizar(Long id, ProdutoDTO dto) {
 
-		if (id != null && !BigDecimalUtils.isLess(produto.getQuantidade(), BigDecimal.ZERO)) {
+		if (id != null && !BigDecimalUtils.isLess(dto.getQuantidade(), BigDecimal.ZERO)) {
 
-			produto.setId(id);
-			produto.setDataAlteracao(Calendar.getInstance());
+			dto.setId(id);
+			dto.setDataAlteracao(Calendar.getInstance());
 		}
 
 		try {
 
-			this.getRepository().merge(produto);
+			this.getRepository().merge(dto);
 
 		} catch (NotFoundException e) {
 			throw new EstoqueException("Ocorreu um problema ao tentar salvar o produto.");
@@ -115,11 +118,11 @@ public class ProdutoServiceImpl implements ProdutoService {
 	}
 
 	@Override
-	public List<ProdutoDTO> getProdutos() {
+	public List<ProdutoDetalheDTO> getProdutos() {
 
 		List<Produto> produtos = this.getRepository().getProdutos();
 
-		List<ProdutoDTO> dtos = this.produtoMapper.toDTOs(produtos);
+		List<ProdutoDetalheDTO> dtos = this.produtoMapper.toDTOs(produtos);
 
 		return dtos;
 	}
