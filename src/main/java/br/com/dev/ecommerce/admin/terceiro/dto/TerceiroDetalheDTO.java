@@ -1,13 +1,10 @@
 package br.com.dev.ecommerce.admin.terceiro.dto;
 
-import br.com.dev.ecommerce.admin.terceiro.Categoria;
-import br.com.dev.ecommerce.dto.AbstractDTO;
-
-public class TerceiroDTO extends AbstractDTO {
+public class TerceiroDetalheDTO {
 
 	private String nome;
 	private String cpf;
-	private Categoria categoria;
+	private String categoriaDescricao;
 
 	public String getNome() {
 		return nome;
@@ -25,12 +22,12 @@ public class TerceiroDTO extends AbstractDTO {
 		this.cpf = cpf;
 	}
 
-	public Categoria getCategoria() {
-		return categoria;
+	public String getCategoriaDescricao() {
+		return categoriaDescricao;
 	}
 
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
+	public void setCategoriaDescricao(String categoriaDescricao) {
+		this.categoriaDescricao = categoriaDescricao;
 	}
 
 }

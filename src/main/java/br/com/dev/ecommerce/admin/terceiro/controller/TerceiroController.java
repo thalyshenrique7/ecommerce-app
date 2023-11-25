@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.dev.ecommerce.admin.terceiro.model.Terceiro;
+import br.com.dev.ecommerce.admin.terceiro.dto.TerceiroDTO;
+import br.com.dev.ecommerce.admin.terceiro.dto.TerceiroDetalheDTO;
 import br.com.dev.ecommerce.admin.terceiro.service.TerceiroServiceImpl;
 
 @RestController
@@ -23,15 +24,15 @@ public class TerceiroController {
 	private TerceiroServiceImpl terceiroService;
 	
 	@GetMapping(value = "{id}")
-	public ResponseEntity<Terceiro> buscar(@PathVariable(value = "id") Long id){
+	public ResponseEntity<TerceiroDetalheDTO> buscar(@PathVariable(value = "id") Long id){
 		
 		return ResponseEntity.status(HttpStatus.OK).body(this.terceiroService.buscar(id));
 	}
 	
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
-	public void salvar(@RequestBody Terceiro terceiro) {
+	public void salvar(@RequestBody TerceiroDTO terceiroDTO) {
 		
-		this.terceiroService.salvar(terceiro);
+		this.terceiroService.salvar(terceiroDTO);
 	}
 }

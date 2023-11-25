@@ -4,12 +4,16 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import br.com.dev.ecommerce.admin.terceiro.Categoria;
 
 /*
  * @author Thalys Henrique
@@ -27,12 +31,24 @@ public class Terceiro implements Serializable {
 	private Long id;
 
 	private String nome;
+	private String cpf;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataCriacao;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataAlteracao;
+
+	@Enumerated(EnumType.STRING)
+	private Categoria categoria;
+
+	public Terceiro() {
+
+	}
+
+	public Terceiro(Class<Terceiro> class1) {
+
+	}
 
 	public Long getId() {
 		return id;
@@ -50,6 +66,14 @@ public class Terceiro implements Serializable {
 		this.nome = nome;
 	}
 
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
 	public Calendar getDataCriacao() {
 		return dataCriacao;
 	}
@@ -64,6 +88,14 @@ public class Terceiro implements Serializable {
 
 	public void setDataAlteracao(Calendar dataAlteracao) {
 		this.dataAlteracao = dataAlteracao;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 }

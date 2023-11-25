@@ -7,6 +7,7 @@ import { TerceiroService } from './terceiro.service';
 export interface TerceiroForm {
 
   nome: FormControl<string>;
+  cpf: FormControl<string>;
 }
 
 @Component({
@@ -17,7 +18,6 @@ export interface TerceiroForm {
 export class TerceiroComponent implements OnInit {
 
   form: FormGroup<TerceiroForm>;
-  //empresas: Empresa[];
 
   constructor(
     private menuService: MenuService,
@@ -32,6 +32,7 @@ export class TerceiroComponent implements OnInit {
 
     this.form = this.fb.group<TerceiroForm>({
       nome: this.fb.control('', Validators.required),
+      cpf: this.fb.control('', Validators.required),
     })
   }
 

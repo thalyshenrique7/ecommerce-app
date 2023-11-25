@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.dev.ecommerce.admin.terceiro.model.Terceiro;
-import br.com.dev.ecommerce.admin.terceiro.service.TerceiroServiceImpl;
+import br.com.dev.ecommerce.admin.terceiro.repository.TerceiroRepository;
 import br.com.dev.ecommerce.estoque.dto.PedidoVendaDTO;
 import br.com.dev.ecommerce.estoque.exception.EstoqueException;
 import br.com.dev.ecommerce.estoque.exception.NotFoundException;
@@ -20,7 +20,7 @@ public class PedidoVendaServiceImpl implements PedidoVendaService {
 	private PedidoVendaRepository pedidoRepository;
 
 	@Autowired
-	private TerceiroServiceImpl terceiroService;
+	private TerceiroRepository terceiroRepository;
 
 	@Override
 	public PedidoVenda buscar(Long id) {
@@ -37,7 +37,7 @@ public class PedidoVendaServiceImpl implements PedidoVendaService {
 		if (pedidoVendaDTO != null) {
 
 			Long terceiroId = pedidoVendaDTO.getTerceiroId();
-			Terceiro terceiro = this.terceiroService.buscar(terceiroId);
+			Terceiro terceiro = this.terceiroRepository.findById(terceiroId).orElse(null);
 
 			PedidoVenda pedido = new PedidoVenda();
 

@@ -24,14 +24,16 @@
                 </div>
             </div>
 
-            <!-- <div class="row">
+            <div class="row">
                 <div class="group-row">
-                    <label>Empresas</label>
-                    <ng-select class="select-padrao" [items]="empresas" bindLabel="nome" [multiple]="false"
-                        [clearable]="false" [searchable]="false"></ng-select>
+                    <label>CPF</label>
+                    <input type="text" name="cpf" id="cpf" formControlName="cpf" required />
+                    <label class="error-input" *ngIf="form.get('cpf')?.errors?.['required'] &&
+                    form.get('cpf')?.touched">
+                        Campo Obrigatório!
+                    </label>
                 </div>
-            </div> -->
-
+            </div>
 
             <div class="row">
                 <div class="group-row">

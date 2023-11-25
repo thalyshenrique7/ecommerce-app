@@ -1,15 +1,16 @@
 package br.com.dev.ecommerce.admin.terceiro.service;
 
-import br.com.dev.ecommerce.admin.terceiro.model.Terceiro;
+import br.com.dev.ecommerce.admin.terceiro.dto.TerceiroDTO;
+import br.com.dev.ecommerce.admin.terceiro.dto.TerceiroDetalheDTO;
 
 public interface TerceiroService {
 
-	public Terceiro buscar(Long id);
+	public TerceiroDetalheDTO buscar(Long id);
 
-	public void salvar(Terceiro terceiro);
+	public void salvar(TerceiroDTO terceiroDTO);
 
 	public void excluir(Long id);
 
-	public void atualizar(Long id, Terceiro novoTerceiro);
+	public void atualizar(Long id, TerceiroDTO novoTerceiroDTO);
 
 }
