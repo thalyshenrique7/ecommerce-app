@@ -17,8 +17,11 @@ public class LoginServiceImpl implements LoginService {
 	public boolean acessar(LoginDTO dto) {
 
 		Usuario usuario = this.usuarioRepository.findByEmail(dto.getEmail());
+		
+		if (usuario.getEmail() == null)
+			throw new RuntimeException("Usuário não encontrado na base de dados.");
 
-		if (usuario != null && usuario.getSenha().equals(dto.getSenha())) {
+		if (usuario.getSenha().equals(dto.getSenha()) && usuario.getEmail().equals(dto.getEmail())) {
 
 			usuario.setLogado(true);
 

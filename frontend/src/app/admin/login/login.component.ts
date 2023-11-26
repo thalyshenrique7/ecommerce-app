@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth.service';
 import { LoginService } from './login.service';
 
 export interface LoginForm {
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private loginService: LoginService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -43,7 +45,9 @@ export class LoginComponent implements OnInit {
 
     if (this.form.valid) {
       this.loginService.acessar(email.value, senha.value).subscribe(
-        dados => {
+        token => {
+          this.authService.setToken(token);
+          this.authService.checkIsAutenticado(true);
           this.router.navigate(['/dashboard']);
         },
         (error) => {
