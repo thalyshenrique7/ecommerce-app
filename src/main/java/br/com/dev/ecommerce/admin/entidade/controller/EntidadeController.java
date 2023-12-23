@@ -1,5 +1,7 @@
 package br.com.dev.ecommerce.admin.entidade.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -42,6 +44,12 @@ public class EntidadeController {
 	public void excluir(@PathVariable(value = "id") Long id) {
 		
 		this.entidadeService.excluir(id);
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<EntidadeDTO>> getEntidades() {
+		
+		return ResponseEntity.status(HttpStatus.OK).body(this.entidadeService.getEntidades());
 	}
 
 }

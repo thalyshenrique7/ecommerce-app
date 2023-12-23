@@ -3,7 +3,6 @@ package br.com.dev.ecommerce.estoque.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,17 +16,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.DynamicUpdate;
 
 import br.com.dev.ecommerce.admin.terceiro.model.Terceiro;
+import br.com.dev.ecommerce.utils.DataUtils;
 
 @DynamicUpdate
 @Entity
 @Table(name = "pedido_venda")
-public class PedidoVenda implements Serializable {
+public class PedidoVenda extends DataUtils implements Serializable {
 	private static final long serialVersionUID = 985098201651404172L;
 
 	@Id
@@ -45,9 +43,6 @@ public class PedidoVenda implements Serializable {
 	private List<Produto> produtos;
 
 	private boolean cancelado;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar dataSaida;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "terceiro_id")
@@ -103,14 +98,6 @@ public class PedidoVenda implements Serializable {
 
 	public void setCancelado(boolean cancelado) {
 		this.cancelado = cancelado;
-	}
-
-	public Calendar getDataSaida() {
-		return dataSaida;
-	}
-
-	public void setDataSaida(Calendar dataSaida) {
-		this.dataSaida = dataSaida;
 	}
 
 	public Terceiro getTerceiro() {

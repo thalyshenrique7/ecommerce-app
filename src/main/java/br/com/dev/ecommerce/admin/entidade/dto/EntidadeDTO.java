@@ -8,10 +8,6 @@ public class EntidadeDTO {
 
 	public Endereco endereco;
 
-	public Long empresaId;
-
-	public String empresaNome;
-
 	public String statusDescricao;
 
 	public String getNome() {
@@ -28,22 +24,6 @@ public class EntidadeDTO {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
-	}
-
-	public Long getEmpresaId() {
-		return empresaId;
-	}
-
-	public void setEmpresaId(Long empresaId) {
-		this.empresaId = empresaId;
-	}
-
-	public String getEmpresaNome() {
-		return empresaNome;
-	}
-
-	public void setEmpresaNome(String empresaNome) {
-		this.empresaNome = empresaNome;
 	}
 
 	public String getStatusDescricao() {

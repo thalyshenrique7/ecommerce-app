@@ -2,7 +2,6 @@ package br.com.dev.ecommerce.estoque.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,13 +11,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.envers.Audited;
 
 import br.com.dev.ecommerce.estoque.enums.Movimentacao;
+import br.com.dev.ecommerce.utils.DataUtils;
 
 /**
  * @author Thalys Henrique
@@ -29,7 +27,7 @@ import br.com.dev.ecommerce.estoque.enums.Movimentacao;
 @Entity
 @DynamicUpdate
 @Table(name = "produto")
-public class Produto implements Serializable {
+public class Produto extends DataUtils implements Serializable {
 	private static final long serialVersionUID = 985098201651404172L;
 
 	@Id
@@ -72,12 +70,6 @@ public class Produto implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	private Movimentacao movimentacao;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar dataCriacao;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar dataAlteracao;
 
 	public Produto() {
 
@@ -189,22 +181,6 @@ public class Produto implements Serializable {
 
 	public void setMovimentacao(Movimentacao movimentacao) {
 		this.movimentacao = movimentacao;
-	}
-
-	public Calendar getDataCriacao() {
-		return dataCriacao;
-	}
-
-	public void setDataCriacao(Calendar dataCriacao) {
-		this.dataCriacao = dataCriacao;
-	}
-
-	public Calendar getDataAlteracao() {
-		return dataAlteracao;
-	}
-
-	public void setDataAlteracao(Calendar dataAlteracao) {
-		this.dataAlteracao = dataAlteracao;
 	}
 
 }

@@ -8,11 +8,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -21,7 +19,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.DynamicUpdate;
 
-import br.com.dev.ecommerce.admin.empresa.model.Empresa;
 import br.com.dev.ecommerce.admin.endereco.model.Endereco;
 import br.com.dev.ecommerce.admin.entidade.enums.Status;
 
@@ -47,9 +44,6 @@ public class Entidade implements Serializable {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
-
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Empresa empresa;
 
 	@NotNull
 	@Enumerated(EnumType.STRING)
@@ -91,14 +85,6 @@ public class Entidade implements Serializable {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
-	}
-
-	public Empresa getEmpresa() {
-		return empresa;
-	}
-
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
 	}
 
 	public Status getStatus() {

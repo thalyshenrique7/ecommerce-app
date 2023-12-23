@@ -1,6 +1,7 @@
 package br.com.dev.ecommerce.admin.entidade.mapper;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -21,10 +22,15 @@ public abstract class EntidadeMapper extends Entidade implements Serializable {
 	}
 	
 	@Mappings({
-		@Mapping(target = "empresaId", source = "empresa.id"),
-		@Mapping(target = "empresaNome", source = "empresa.nome"),
 		@Mapping(target = "statusDescricao", source = "status.descricao"),
 	})
 	public abstract EntidadeDTO toDTO(Entidade entidade);
+	
+	@Mappings({
+		@Mapping(target = "statusDescricao", source = "status.descricao"),
+	})
+	public abstract List<EntidadeDTO> toDTOs(List<Entidade> dto);
+	
+	public abstract List<Entidade> toEntities(List<EntidadeDTO> dtos);
 
 }

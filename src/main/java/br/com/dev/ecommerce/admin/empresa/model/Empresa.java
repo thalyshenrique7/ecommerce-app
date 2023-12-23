@@ -2,6 +2,7 @@ package br.com.dev.ecommerce.admin.empresa.model;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -17,6 +20,7 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.DynamicUpdate;
 
 import br.com.dev.ecommerce.admin.endereco.model.Endereco;
+import br.com.dev.ecommerce.admin.entidade.model.Entidade;
 
 /**
  * @author Thalys Henrique
@@ -50,6 +54,10 @@ public class Empresa implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataAlteracao;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "entidade_id", referencedColumnName = "id")
+	private List<Entidade> entidades;
 
 	public Empresa() {
 
@@ -113,6 +121,14 @@ public class Empresa implements Serializable {
 
 	public void setDataAlteracao(Calendar dataAlteracao) {
 		this.dataAlteracao = dataAlteracao;
+	}
+
+	public List<Entidade> getEntidades() {
+		return entidades;
+	}
+
+	public void setEntidades(List<Entidade> entidades) {
+		this.entidades = entidades;
 	}
 
 }

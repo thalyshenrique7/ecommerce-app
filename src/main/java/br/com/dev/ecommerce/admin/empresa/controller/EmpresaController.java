@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.dev.ecommerce.admin.empresa.dto.EmpresaDTO;
-import br.com.dev.ecommerce.admin.empresa.model.Empresa;
 import br.com.dev.ecommerce.admin.empresa.service.EmpresaServiceImpl;
 
 @RestController
@@ -31,8 +30,8 @@ public class EmpresaController {
 
 	@PostMapping(value = "/salvar")
 	@ResponseStatus(HttpStatus.CREATED)
-	public void salvar(@RequestBody Empresa empresa) throws Exception {
+	public void salvar(@RequestBody EmpresaDTO empresaDTO) throws Exception {
 
-		this.empresaService.salvar(empresa);
+		this.empresaService.salvar(empresaDTO);
 	}
 }

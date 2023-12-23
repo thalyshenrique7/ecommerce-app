@@ -1,6 +1,7 @@
 package br.com.dev.ecommerce.admin.entidade.service;
 
 import java.util.Calendar;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,6 +73,22 @@ public class EntidadeServiceImpl implements EntidadeService {
 				throw new RuntimeException("Ocorreu um erro ao tentar excluir a entidade.");
 			}
 		}
+	}
+
+	@Override
+	public List<EntidadeDTO> getEntidades() {
+		
+		List<Entidade> entidades = this.entidadeRepository.findAll();
+		
+		List<EntidadeDTO> dtos = this.entidadeMapper.toDTOs(entidades);
+		
+		return dtos;
+	}
+	
+	@Override
+	public List<Entidade> getEntidadeByIds(List<Long> ids) {
+
+		return this.entidadeRepository.findAllByIds(ids);
 	}
 
 }
