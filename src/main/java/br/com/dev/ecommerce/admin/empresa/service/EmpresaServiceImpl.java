@@ -1,7 +1,6 @@
 package br.com.dev.ecommerce.admin.empresa.service;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,19 +26,34 @@ public class EmpresaServiceImpl implements EmpresaService {
 	private EntidadeRepository entidadeRepository;
 
 	@Override
+	public List<EmpresaDTO> buscarEmpresas() {
+
+		List<Empresa> empresas = this.empresaRepository.findByDeletadoFalse();
+
+		List<EmpresaDTO> dtos = this.empresaMapper.toDTOs(empresas);
+
+		return dtos;
+	}
+
+	@Override
 	public EmpresaDTO buscar(Long id) throws Exception {
 
-		Empresa empresaId;
+		Empresa empresaId = null;
 
-		EmpresaDTO dto;
+		EmpresaDTO dto = null;
 
-		try {
+		if (id != null) {
 
-			empresaId = this.empresaRepository.findById(id).orElse(null);
+			try {
+
+				empresaId = this.empresaRepository.findById(id).orElse(null);
+
+			} catch (Exception e) {
+				throw new Exception("A empresa não foi encontrada no sistema.", e);
+			}
 
 			dto = this.empresaMapper.toDTO(empresaId);
-		} catch (Exception e) {
-			throw new Exception("A empresa não foi encontrada no sistema.", e);
+
 		}
 
 		return dto;
@@ -48,34 +62,27 @@ public class EmpresaServiceImpl implements EmpresaService {
 	@Override
 	public void salvar(EmpresaDTO empresaDTO) throws Exception {
 
-		Empresa empresa = null;
+		List<Entidade> entidades = this.entidadeRepository.findAll();
 
-		if (empresaDTO != null) {
+		for (Entidade entidade : entidades) {
 
-			empresaDTO.setDataCriacao(Calendar.getInstance());
-			empresaDTO.setDataAlteracao(Calendar.getInstance());
+			List<Long> entidadeIds = new ArrayList<Long>();
 
-			List<Entidade> entidades = this.entidadeRepository.findAll();
+			entidadeIds.add(entidade.getId());
 
-			for (Entidade entidade : entidades) {
-
-				List<Long> entidadeIds = new ArrayList<Long>();
-
-				entidadeIds.add(entidade.getId());
-
-				empresaDTO.setEntidades(entidadeIds);
-			}
-
-			empresa = this.empresaMapper.toEntity(empresaDTO);
-
-			try {
-
-				this.empresaRepository.save(empresa);
-
-			} catch (Exception e) {
-				throw new Exception("Ocorreu um erro ao tentar salvar a empresa.", e);
-			}
+			empresaDTO.setEntidades(entidadeIds);
 		}
+
+		Empresa empresa = this.empresaMapper.toEntity(empresaDTO);
+
+		try {
+
+			this.empresaRepository.save(empresa);
+
+		} catch (Exception e) {
+			throw new Exception("Ocorreu um erro ao tentar salvar a empresa.", e);
+		}
+
 	}
-	
+
 }

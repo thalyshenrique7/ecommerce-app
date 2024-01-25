@@ -11,11 +11,11 @@ public enum Estado {
 
 	private Long id;
 
-	private String estado;
+	private String descricao;
 
-	private Estado(Long id, String estado) {
+	private Estado(Long id, String descricao) {
 		this.id = id;
-		this.estado = estado;
+		this.descricao = descricao;
 	}
 
 	public Long getId() {
@@ -26,11 +26,11 @@ public enum Estado {
 		this.id = id;
 	}
 
-	public String getEstado() {
-		return estado;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setEstado(String estado) {
-		this.estado = estado;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 }

@@ -51,6 +51,10 @@ public class Endereco implements Serializable {
 	@Column(length = 15)
 	private String pais;
 
+	public Endereco(Class<Endereco> class1) {
+
+	}
+
 	public Long getId() {
 		return id;
 	}

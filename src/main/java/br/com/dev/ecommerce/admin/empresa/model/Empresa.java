@@ -1,6 +1,7 @@
 package br.com.dev.ecommerce.admin.empresa.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -44,6 +45,7 @@ public class Empresa implements Serializable {
 	private String cnpj;
 
 	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
 	private Endereco endereco;
 
 	@Column
@@ -58,6 +60,10 @@ public class Empresa implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "entidade_id", referencedColumnName = "id")
 	private List<Entidade> entidades;
+
+	public boolean ativo;
+
+	public boolean deletado;
 
 	public Empresa() {
 
@@ -124,11 +130,31 @@ public class Empresa implements Serializable {
 	}
 
 	public List<Entidade> getEntidades() {
+
+		if (entidades == null)
+			entidades = new ArrayList<Entidade>();
+
 		return entidades;
 	}
 
 	public void setEntidades(List<Entidade> entidades) {
 		this.entidades = entidades;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	public boolean isDeletado() {
+		return deletado;
+	}
+
+	public void setDeletado(boolean deletado) {
+		this.deletado = deletado;
 	}
 
 }

@@ -1,9 +1,10 @@
 package br.com.dev.ecommerce.admin.empresa.dto;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import br.com.dev.ecommerce.admin.endereco.model.Endereco;
+import br.com.dev.ecommerce.admin.endereco.dto.EnderecoDTO;
 import br.com.dev.ecommerce.dto.AbstractDTO;
 
 public class EmpresaDTO extends AbstractDTO {
@@ -11,7 +12,7 @@ public class EmpresaDTO extends AbstractDTO {
 	private String nome;
 	private String cnpj;
 
-	private Endereco endereco;
+	private EnderecoDTO endereco;
 
 	private List<Long> entidades;
 
@@ -34,11 +35,11 @@ public class EmpresaDTO extends AbstractDTO {
 		this.cnpj = cnpj;
 	}
 
-	public Endereco getEndereco() {
+	public EnderecoDTO getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(Endereco endereco) {
+	public void setEndereco(EnderecoDTO endereco) {
 		this.endereco = endereco;
 	}
 
@@ -59,6 +60,10 @@ public class EmpresaDTO extends AbstractDTO {
 	}
 
 	public List<Long> getEntidades() {
+
+		if (entidades == null)
+			entidades = new ArrayList<Long>();
+
 		return entidades;
 	}
 

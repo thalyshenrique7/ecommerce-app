@@ -12,9 +12,10 @@ import org.mapstruct.ReportingPolicy;
 
 import br.com.dev.ecommerce.admin.empresa.dto.EmpresaDTO;
 import br.com.dev.ecommerce.admin.empresa.model.Empresa;
+import br.com.dev.ecommerce.admin.endereco.mapper.EnderecoMapper;
 import br.com.dev.ecommerce.admin.entidade.model.Entidade;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = EnderecoMapper.class)
 public abstract class EmpresaMapper extends Empresa implements Serializable {
 	private static final long serialVersionUID = 985098201651404172L;
 
@@ -27,6 +28,8 @@ public abstract class EmpresaMapper extends Empresa implements Serializable {
 
 	@Mappings({ @Mapping(target = "entidades", source = "entidades", qualifiedByName = "mapEntidades"), })
 	public abstract Empresa toEntity(EmpresaDTO empresa);
+
+	public abstract List<EmpresaDTO> toDTOs(List<Empresa> entities);
 
 	@Named(value = "mapEntidades")
 	public List<Long> mapEntidades(List<Entidade> entidades) {
