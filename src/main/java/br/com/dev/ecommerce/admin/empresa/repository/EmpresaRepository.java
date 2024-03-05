@@ -2,13 +2,13 @@ package br.com.dev.ecommerce.admin.empresa.repository;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import br.com.dev.ecommerce.admin.empresa.model.Empresa;
+import br.com.dev.ecommerce.utils.repository.RepositoryBase;
 
 @Repository
-public interface EmpresaRepository extends JpaRepository<Empresa, Long> {
+public interface EmpresaRepository extends RepositoryBase<Empresa> {
 
 	List<Empresa> findByDeletadoFalse();
 }

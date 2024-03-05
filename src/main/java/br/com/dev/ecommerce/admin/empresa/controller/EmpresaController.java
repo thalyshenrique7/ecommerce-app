@@ -12,26 +12,26 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.dev.ecommerce.admin.empresa.dto.EmpresaDTO;
-import br.com.dev.ecommerce.admin.empresa.service.EmpresaServiceImpl;
+import br.com.dev.ecommerce.admin.empresa.service.EmpresaService;
 
 @RestController
 @RequestMapping(value = "/api/empresa", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EmpresaController {
 
 	@Autowired
-	private EmpresaServiceImpl empresaService;
-	
+	private EmpresaService service;
+
 	@GetMapping(value = "{id}")
 	@ResponseStatus(value = HttpStatus.OK)
 	public EmpresaDTO buscar(@PathVariable(value = "id") Long id) throws Exception {
-		
-		return this.empresaService.buscar(id);
+
+		return this.service.buscar(id);
 	}
 
 	@PostMapping(value = "/salvar")
 	@ResponseStatus(HttpStatus.CREATED)
 	public void salvar(@RequestBody EmpresaDTO empresaDTO) throws Exception {
 
-		this.empresaService.salvar(empresaDTO);
+		this.service.salvar(empresaDTO);
 	}
 }

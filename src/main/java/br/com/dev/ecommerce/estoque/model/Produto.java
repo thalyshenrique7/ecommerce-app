@@ -16,7 +16,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.envers.Audited;
 
 import br.com.dev.ecommerce.estoque.enums.Movimentacao;
-import br.com.dev.ecommerce.utils.DataUtils;
+import br.com.dev.ecommerce.utils.data.DataUtils;
 
 /**
  * @author Thalys Henrique

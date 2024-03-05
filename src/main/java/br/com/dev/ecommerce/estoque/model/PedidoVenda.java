@@ -20,7 +20,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.DynamicUpdate;
 
 import br.com.dev.ecommerce.admin.terceiro.model.Terceiro;
-import br.com.dev.ecommerce.utils.DataUtils;
+import br.com.dev.ecommerce.utils.data.DataUtils;
 
 @DynamicUpdate
 @Entity

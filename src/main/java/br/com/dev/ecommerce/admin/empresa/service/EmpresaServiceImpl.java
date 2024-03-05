@@ -1,7 +1,8 @@
 package br.com.dev.ecommerce.admin.empresa.service;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,11 +11,11 @@ import br.com.dev.ecommerce.admin.empresa.dto.EmpresaDTO;
 import br.com.dev.ecommerce.admin.empresa.mapper.EmpresaMapper;
 import br.com.dev.ecommerce.admin.empresa.model.Empresa;
 import br.com.dev.ecommerce.admin.empresa.repository.EmpresaRepository;
-import br.com.dev.ecommerce.admin.entidade.model.Entidade;
-import br.com.dev.ecommerce.admin.entidade.repository.EntidadeRepository;
+import br.com.dev.ecommerce.utils.service.ServiceBaseImpl;
 
 @Service
-public class EmpresaServiceImpl implements EmpresaService {
+@Transactional
+public abstract class EmpresaServiceImpl extends ServiceBaseImpl<Empresa> implements EmpresaService {
 
 	@Autowired
 	private EmpresaRepository empresaRepository;
@@ -22,8 +23,10 @@ public class EmpresaServiceImpl implements EmpresaService {
 	@Autowired
 	private EmpresaMapper empresaMapper;
 
-	@Autowired
-	private EntidadeRepository entidadeRepository;
+	public EmpresaServiceImpl() {
+
+		super(Empresa.class);
+	}
 
 	@Override
 	public List<EmpresaDTO> buscarEmpresas() {
@@ -61,17 +64,6 @@ public class EmpresaServiceImpl implements EmpresaService {
 
 	@Override
 	public void salvar(EmpresaDTO empresaDTO) throws Exception {
-
-		List<Entidade> entidades = this.entidadeRepository.findAll();
-
-		for (Entidade entidade : entidades) {
-
-			List<Long> entidadeIds = new ArrayList<Long>();
-
-			entidadeIds.add(entidade.getId());
-
-			empresaDTO.setEntidades(entidadeIds);
-		}
 
 		Empresa empresa = this.empresaMapper.toEntity(empresaDTO);
 

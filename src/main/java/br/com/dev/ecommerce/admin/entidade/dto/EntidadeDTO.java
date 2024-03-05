@@ -1,8 +1,9 @@
 package br.com.dev.ecommerce.admin.entidade.dto;
 
 import br.com.dev.ecommerce.admin.endereco.model.Endereco;
+import br.com.dev.ecommerce.dto.AbstractDTO;
 
-public class EntidadeDTO {
+public class EntidadeDTO extends AbstractDTO {
 
 	public String nome;
 

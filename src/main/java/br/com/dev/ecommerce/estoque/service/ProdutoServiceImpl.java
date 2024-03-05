@@ -13,11 +13,10 @@ import br.com.dev.ecommerce.estoque.dto.ProdutoDTO;
 import br.com.dev.ecommerce.estoque.dto.ProdutoDetalheDTO;
 import br.com.dev.ecommerce.estoque.enums.Movimentacao;
 import br.com.dev.ecommerce.estoque.exception.EstoqueException;
-import br.com.dev.ecommerce.estoque.exception.NotFoundException;
 import br.com.dev.ecommerce.estoque.mapper.ProdutoMapper;
 import br.com.dev.ecommerce.estoque.model.Produto;
 import br.com.dev.ecommerce.estoque.repository.ProdutoRepository;
-import br.com.dev.ecommerce.utils.BigDecimalUtils;
+import br.com.dev.ecommerce.utils.number.BigDecimalUtils;
 
 @Service
 public class ProdutoServiceImpl implements ProdutoService {
@@ -33,13 +32,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
 		Produto produtoId;
 
-		try {
-
-			produtoId = this.produtoRepository.findById(id).orElse(null);
-
-		} catch (NotFoundException e) {
-			throw new EstoqueException("Produto não encontrado no sistema.");
-		}
+		produtoId = this.produtoRepository.findById(id).orElse(null);
 
 		ProdutoDetalheDTO dto = produtoMapper.toDetalheDTO(produtoId);
 
@@ -51,7 +44,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
 		Produto produto = null;
 
-		if (dto != null && BigDecimalUtils.isGreater(dto.getQuantidade(), BigDecimal.ZERO)) {
+		if (dto != null && BigDecimalUtils.isGreaterThan(dto.getQuantidade(), BigDecimal.ZERO)) {
 
 			/*
 			 * Ao cadastrar um novo produto o tipo da movimentação deve ser Saldo Inicial
@@ -102,19 +95,13 @@ public class ProdutoServiceImpl implements ProdutoService {
 	@Override
 	public void atualizar(Long id, ProdutoDTO dto) {
 
-		if (id != null && !BigDecimalUtils.isLess(dto.getQuantidade(), BigDecimal.ZERO)) {
+		if (id != null && !BigDecimalUtils.isLessThan(dto.getQuantidade(), BigDecimal.ZERO)) {
 
 			dto.setId(id);
 			dto.setDataAlteracao(Calendar.getInstance());
 		}
 
-		try {
-
-			this.getRepository().merge(dto);
-
-		} catch (NotFoundException e) {
-			throw new EstoqueException("Ocorreu um problema ao tentar salvar o produto.");
-		}
+		this.getRepository().merge(dto);
 	}
 
 	@Override

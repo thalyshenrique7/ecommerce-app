@@ -2,7 +2,6 @@ package br.com.dev.ecommerce.admin.empresa.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,13 +14,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.DynamicUpdate;
 
 import br.com.dev.ecommerce.admin.endereco.model.Endereco;
 import br.com.dev.ecommerce.admin.entidade.model.Entidade;
+import br.com.dev.ecommerce.utils.EntityBase;
 
 /**
  * @author Thalys Henrique
@@ -32,7 +30,7 @@ import br.com.dev.ecommerce.admin.entidade.model.Entidade;
 @Entity
 @DynamicUpdate
 @Table(name = "empresa")
-public class Empresa implements Serializable {
+public class Empresa extends EntityBase implements Serializable {
 
 	private static final long serialVersionUID = 985098201651404172L;
 
@@ -51,12 +49,6 @@ public class Empresa implements Serializable {
 	@Column
 	private boolean matriz = true;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar dataCriacao;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar dataAlteracao;
-
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "entidade_id", referencedColumnName = "id")
 	private List<Entidade> entidades;
@@ -66,10 +58,6 @@ public class Empresa implements Serializable {
 	public boolean deletado;
 
 	public Empresa() {
-
-	}
-
-	public Empresa(Class<Empresa> empresa) {
 
 	}
 
@@ -111,22 +99,6 @@ public class Empresa implements Serializable {
 
 	public void setMatriz(boolean matriz) {
 		this.matriz = matriz;
-	}
-
-	public Calendar getDataCriacao() {
-		return dataCriacao;
-	}
-
-	public void setDataCriacao(Calendar dataCriacao) {
-		this.dataCriacao = dataCriacao;
-	}
-
-	public Calendar getDataAlteracao() {
-		return dataAlteracao;
-	}
-
-	public void setDataAlteracao(Calendar dataAlteracao) {
-		this.dataAlteracao = dataAlteracao;
 	}
 
 	public List<Entidade> getEntidades() {

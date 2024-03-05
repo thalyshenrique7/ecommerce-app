@@ -1,14 +1,11 @@
 package br.com.dev.ecommerce.estoque.service;
 
-import java.util.Calendar;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.dev.ecommerce.admin.terceiro.model.Terceiro;
 import br.com.dev.ecommerce.admin.terceiro.repository.TerceiroRepository;
 import br.com.dev.ecommerce.estoque.dto.PedidoVendaDTO;
-import br.com.dev.ecommerce.estoque.exception.EstoqueException;
 import br.com.dev.ecommerce.estoque.exception.NotFoundException;
 import br.com.dev.ecommerce.estoque.mapper.PedidoVendaMapper;
 import br.com.dev.ecommerce.estoque.model.PedidoVenda;
@@ -27,7 +24,7 @@ public class PedidoVendaServiceImpl implements PedidoVendaService {
 	private PedidoVendaMapper mapper;
 
 	@Override
-	public PedidoVendaDTO buscar(Long id) {
+	public PedidoVendaDTO buscar(Long id) throws NotFoundException {
 		
 		PedidoVenda pedidoVenda = this.pedidoRepository.findById(id).orElse(null);
 
@@ -40,7 +37,7 @@ public class PedidoVendaServiceImpl implements PedidoVendaService {
 	}
 
 	@Override
-	public void efetuar(PedidoVendaDTO pedidoVendaDTO) {
+	public void efetuar(PedidoVendaDTO pedidoVendaDTO) throws NotFoundException {
 
 		Terceiro terceiro = this.terceiroRepository.findById(pedidoVendaDTO.getTerceiroId()).orElse(null);
 
@@ -50,21 +47,19 @@ public class PedidoVendaServiceImpl implements PedidoVendaService {
 		pedido.setProdutos(pedidoVendaDTO.getProdutos());
 		pedido.setCancelado(pedidoVendaDTO.isCancelado());
 		pedido.setTerceiro(terceiro);
-		pedido.setDataCriacao(Calendar.getInstance());
-		pedido.setDataAlteracao(Calendar.getInstance());
 
 		try {
 
 			pedidoRepository.save(pedido);
 
 		} catch (Exception e) {
-			throw new EstoqueException("Não foi possível efetuar o pedido de venda.");
+			throw new NotFoundException("Não foi possível efetuar o pedido de venda.");
 		}
 
 	}
 
 	@Override
-	public void cancelar(Long id) {
+	public void cancelar(Long id) throws NotFoundException {
 
 		PedidoVenda pedido = this.pedidoRepository.findById(id).orElse(null);
 

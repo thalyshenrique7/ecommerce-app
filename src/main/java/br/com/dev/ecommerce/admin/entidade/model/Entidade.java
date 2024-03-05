@@ -1,7 +1,6 @@
 package br.com.dev.ecommerce.admin.entidade.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,14 +12,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.DynamicUpdate;
 
 import br.com.dev.ecommerce.admin.endereco.model.Endereco;
 import br.com.dev.ecommerce.admin.entidade.enums.Status;
+import br.com.dev.ecommerce.utils.EntityBase;
 
 /**
  * @author Thalys Henrique
@@ -31,7 +29,7 @@ import br.com.dev.ecommerce.admin.entidade.enums.Status;
 @Entity
 @DynamicUpdate
 @Table(name = "entidade")
-public class Entidade implements Serializable {
+public class Entidade extends EntityBase implements Serializable {
 
 	private static final long serialVersionUID = 985098201651404172L;
 
@@ -49,17 +47,7 @@ public class Entidade implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Status status;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar dataCriacao;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar dataAlteracao;
-
 	public Entidade() {
-
-	}
-
-	public Entidade(Class<Entidade> class1) {
 
 	}
 
@@ -93,22 +81,6 @@ public class Entidade implements Serializable {
 
 	public void setStatus(Status status) {
 		this.status = status;
-	}
-
-	public Calendar getDataCriacao() {
-		return dataCriacao;
-	}
-
-	public void setDataCriacao(Calendar dataCriacao) {
-		this.dataCriacao = dataCriacao;
-	}
-
-	public Calendar getDataAlteracao() {
-		return dataAlteracao;
-	}
-
-	public void setDataAlteracao(Calendar dataAlteracao) {
-		this.dataAlteracao = dataAlteracao;
 	}
 
 }

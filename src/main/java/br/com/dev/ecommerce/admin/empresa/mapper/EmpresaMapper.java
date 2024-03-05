@@ -1,24 +1,21 @@
 package br.com.dev.ecommerce.admin.empresa.mapper;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
-import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 
 import br.com.dev.ecommerce.admin.empresa.dto.EmpresaDTO;
 import br.com.dev.ecommerce.admin.empresa.model.Empresa;
 import br.com.dev.ecommerce.admin.endereco.mapper.EnderecoMapper;
-import br.com.dev.ecommerce.admin.entidade.model.Entidade;
+import br.com.dev.ecommerce.admin.entidade.mapper.EntidadeMapper;
+import br.com.dev.ecommerce.utils.mapper.MapperBase;
+import br.com.dev.ecommerce.utils.mapper.MapperBaseImpl;
+import br.com.dev.ecommerce.utils.mapper.MapperUtil;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = EnderecoMapper.class)
-public abstract class EmpresaMapper extends Empresa implements Serializable {
-	private static final long serialVersionUID = 985098201651404172L;
-
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, imports = MapperUtil.class, uses = { EnderecoMapper.class, EntidadeMapper.class })
+public abstract class EmpresaMapper extends MapperBaseImpl<Empresa> implements MapperBase<Empresa, EmpresaDTO>{
+	
 	public EmpresaMapper() {
 
 		super(Empresa.class);
@@ -26,15 +23,8 @@ public abstract class EmpresaMapper extends Empresa implements Serializable {
 
 	public abstract EmpresaDTO toDTO(Empresa empresa);
 
-	@Mappings({ @Mapping(target = "entidades", source = "entidades", qualifiedByName = "mapEntidades"), })
 	public abstract Empresa toEntity(EmpresaDTO empresa);
 
 	public abstract List<EmpresaDTO> toDTOs(List<Empresa> entities);
-
-	@Named(value = "mapEntidades")
-	public List<Long> mapEntidades(List<Entidade> entidades) {
-
-		return entidades.stream().map(Entidade::getId).collect(Collectors.toList());
-	}
 
 }
